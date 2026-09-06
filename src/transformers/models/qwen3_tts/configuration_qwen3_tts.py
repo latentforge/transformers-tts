@@ -281,9 +281,10 @@ class Qwen3TTSTalkerConfig(PreTrainedConfig):
     keys_to_ignore_at_inference = ["past_key_values"]
     sub_configs = {"code_predictor_config": Qwen3TTSTalkerCodePredictorConfig}
     default_theta = 500000.0
-    # The talker applies mRoPE on top of a standard rotary embedding, so `mrope_section` rides along
-    # in `rope_parameters` without being part of the `default` rope schema. Same handling as Qwen2-VL.
-    ignore_keys_at_rope_validation = {"mrope_section"}
+    # The talker applies mRoPE on top of a standard rotary embedding, so `mrope_section` and the
+    # `interleaved` flag ride along in `rope_parameters` without being part of the `default` rope
+    # schema. Same handling as Qwen2-VL.
+    ignore_keys_at_rope_validation = {"mrope_section", "interleaved"}
 
     def __init__(
         self,
